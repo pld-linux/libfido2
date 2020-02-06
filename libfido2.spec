@@ -1,13 +1,13 @@
 Summary:	Library functionality for FIDO 2.0, including communication with a device over USB
 Summary(pl.UTF-8):	Biblioteka funkcji dla FIDO 2.0, wraz z komunikacją z urządzeniem po USB
 Name:		libfido2
-Version:	1.2.0
+Version:	1.3.0
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/Yubico/libfido2/releases
 Source0:	https://github.com/Yubico/libfido2/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	3075949f4683d3960871d4c23d6f4089
+# Source0-md5:	1b91a8fd24f1ba833a5dc46abaecd4e9
 URL:		https://developers.yubico.com/libfido2/
 BuildRequires:	cmake >= 3.0
 BuildRequires:	hidapi-devel >= 0.8.0
@@ -31,8 +31,8 @@ Summary:	Header files for FIDO2 library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki FIDO2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	openssl-devel >= 1.1.0
 Requires:	hidapi-devel >= 0.8.0
+Requires:	openssl-devel >= 1.1.0
 
 %description devel
 Header files for FIDO2 library.
@@ -59,6 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_datadir}
+mv $RPM_BUILD_ROOT{%{_prefix}/man,%{_mandir}}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -73,6 +76,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/fido2-token
 %attr(755,root,root) %{_libdir}/libfido2.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libfido2.so.1
+%attr(755,root,root) %{_libdir}/libsk-libfido2.so
+%{_mandir}/man1/fido2-assert.1*
+%{_mandir}/man1/fido2-cred.1*
+%{_mandir}/man1/fido2-token.1*
 
 %files devel
 %defattr(644,root,root,755)
@@ -80,3 +87,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/fido
 %{_includedir}/fido.h
 %{_pkgconfigdir}/libfido2.pc
+%{_mandir}/man3/*_pk_*.3*
+%{_mandir}/man3/fido*.3*
