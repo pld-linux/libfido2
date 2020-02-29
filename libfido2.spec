@@ -2,7 +2,7 @@ Summary:	Library functionality for FIDO 2.0, including communication with a devi
 Summary(pl.UTF-8):	Biblioteka funkcji dla FIDO 2.0, wraz z komunikacją z urządzeniem po USB
 Name:		libfido2
 Version:	1.3.1
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/Yubico/libfido2/releases
@@ -10,10 +10,10 @@ Source0:	https://github.com/Yubico/libfido2/archive/%{version}/%{name}-%{version
 # Source0-md5:	f5bbdebb31c0c5196e6b7ed8c1acddd5
 URL:		https://developers.yubico.com/libfido2/
 BuildRequires:	cmake >= 3.0
-BuildRequires:	hidapi-devel >= 0.8.0
 BuildRequires:	libcbor-devel
 BuildRequires:	openssl-devel >= 1.1.0
 BuildRequires:	pkgconfig
+BuildRequires:	udev-devel
 Requires:	openssl >= 1.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -31,7 +31,6 @@ Summary:	Header files for FIDO2 library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki FIDO2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	hidapi-devel >= 0.8.0
 Requires:	openssl-devel >= 1.1.0
 
 %description devel
@@ -39,6 +38,18 @@ Header files for FIDO2 library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki FIDO2.
+
+%package static
+Summary:	Static FIDO2 library
+Summary(pl.UTF-8):	Biblioteka statyczna FIDO2
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Static FIDO2 library.
+
+%description static -l pl.UTF-8
+Biblioteka statyczna FIDO2.
 
 %prep
 %setup -q
@@ -60,7 +71,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_datadir}
-mv $RPM_BUILD_ROOT{%{_prefix}/man,%{_mandir}}
+%{__mv} $RPM_BUILD_ROOT{%{_prefix}/man,%{_mandir}}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -88,3 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/libfido2.pc
 %{_mandir}/man3/*_pk_*.3*
 %{_mandir}/man3/fido*.3*
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libfido2.a
