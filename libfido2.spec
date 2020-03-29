@@ -1,3 +1,7 @@
+# TODO
+# - fix linking (libs pulls devel):
+#   libfido2-1.3.1-2.x86_64 marks libcbor-devel-0.5.0-1.x86_64 (cap libcbor.so()(64bit))
+#    libcbor-devel-0.5.0-1.x86_64 marks libcbor-0.5.0-1.x86_64 (cap libcbor = 0.5.0-1)
 Summary:	Library functionality for FIDO 2.0, including communication with a device over USB
 Summary(pl.UTF-8):	Biblioteka funkcji dla FIDO 2.0, wraz z komunikacją z urządzeniem po USB
 Name:		libfido2
