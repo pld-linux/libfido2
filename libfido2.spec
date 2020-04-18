@@ -1,15 +1,16 @@
 Summary:	Library functionality for FIDO 2.0, including communication with a device over USB
 Summary(pl.UTF-8):	Biblioteka funkcji dla FIDO 2.0, wraz z komunikacją z urządzeniem po USB
 Name:		libfido2
-Version:	1.3.1
-Release:	3
+Version:	1.4.0
+Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/Yubico/libfido2/releases
 Source0:	https://github.com/Yubico/libfido2/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	f5bbdebb31c0c5196e6b7ed8c1acddd5
+# Source0-md5:	829f0d580b456d39ea9213513ffe6667
 URL:		https://developers.yubico.com/libfido2/
 BuildRequires:	cmake >= 3.0
+BuildRequires:	hidapi-devel
 BuildRequires:	libcbor-devel
 BuildRequires:	openssl-devel >= 1.1.0
 BuildRequires:	pkgconfig
@@ -60,7 +61,8 @@ cd build
 # note: exects CMAKE_INSTALL_LIBDIR relative to prefix
 %cmake .. \
 	-DCMAKE_INSTALL_LIBDIR=%{_lib} \
-	-DGZIP_PATH=FALSE
+	-DGZIP_PATH=FALSE \
+	-DUSE_HIDAPI=1
 
 %{__make}
 
@@ -69,9 +71,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-install -d $RPM_BUILD_ROOT%{_datadir}
-%{__mv} $RPM_BUILD_ROOT{%{_prefix}/man,%{_mandir}}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
