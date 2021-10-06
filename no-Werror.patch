@@ -1,0 +1,26 @@
+--- libfido2-1.5.0/CMakeLists.txt~	2020-09-01 09:17:43.000000000 +0200
++++ libfido2-1.5.0/CMakeLists.txt	2021-10-06 22:29:32.451948931 +0200
+@@ -128,13 +128,11 @@
+ 
+ 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
+ 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wextra")
+-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror")
+ 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wshadow")
+ 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wwrite-strings")
+ 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wmissing-prototypes")
+ 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wbad-function-cast")
+ 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pedantic")
+-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pedantic-errors")
+ 	check_c_compiler_flag("-fstack-protector-all" HAVE_STACK_PROTECTOR_ALL)
+ 	if(HAVE_STACK_PROTECTOR_ALL)
+ 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fstack-protector-all")
+@@ -280,9 +280,6 @@
+ 	add_definitions(-DHAVE_GETOPT)
+ 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wcast-qual")
+ else()
+-	if(CMAKE_COMPILER_IS_GNUCC)
+-		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-discarded-qualifiers")
+-	endif()
+ 	if(CMAKE_C_COMPILER_ID STREQUAL "Clang")
+ 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-incompatible-pointer-types-discards-qualifiers")
+ 	endif()
