@@ -14,6 +14,7 @@ BuildRequires:	hidapi-devel
 BuildRequires:	libcbor-devel
 BuildRequires:	openssl-devel >= 1.1.0
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	udev-devel
 BuildRequires:	zlib-devel
 Requires:	openssl >= 1.1.0
