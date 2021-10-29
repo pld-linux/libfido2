@@ -1,14 +1,13 @@
 Summary:	Library functionality for FIDO 2.0, including communication with a device over USB
 Summary(pl.UTF-8):	Biblioteka funkcji dla FIDO 2.0, wraz z komunikacją z urządzeniem po USB
 Name:		libfido2
-Version:	1.5.0
-Release:	3
+Version:	1.9.0
+Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/Yubico/libfido2/releases
 Source0:	https://github.com/Yubico/libfido2/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	0ec7d4a249eec0982576c0dbf8f1ffad
-Patch0:		no-Werror.patch
+# Source0-md5:	ef5bea44900665ae7893e0b5cc740277
 URL:		https://developers.yubico.com/libfido2/
 BuildRequires:	cmake >= 3.0
 BuildRequires:	hidapi-devel
@@ -16,6 +15,7 @@ BuildRequires:	libcbor-devel
 BuildRequires:	openssl-devel >= 1.1.0
 BuildRequires:	pkgconfig
 BuildRequires:	udev-devel
+BuildRequires:	zlib-devel
 Requires:	openssl >= 1.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -55,7 +55,6 @@ Biblioteka statyczna FIDO2.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 install -d build
@@ -64,7 +63,8 @@ cd build
 %cmake .. \
 	-DCMAKE_INSTALL_LIBDIR=%{_lib} \
 	-DGZIP_PATH=FALSE \
-	-DUSE_HIDAPI=1
+	-DUSE_HIDAPI=ON \
+	-DNFC_LINUX=ON
 
 %{__make}
 
