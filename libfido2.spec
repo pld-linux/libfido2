@@ -1,13 +1,13 @@
 Summary:	Library functionality for FIDO 2.0, including communication with a device over USB
 Summary(pl.UTF-8):	Biblioteka funkcji dla FIDO 2.0, wraz z komunikacją z urządzeniem po USB
 Name:		libfido2
-Version:	1.9.0
+Version:	1.10.0
 Release:	1
 License:	BSD
 Group:		Libraries
-#Source0Download: https://github.com/Yubico/libfido2/releases
+#Source0Download: https://github.com/Yubico/libfido2/tags
 Source0:	https://github.com/Yubico/libfido2/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	ef5bea44900665ae7893e0b5cc740277
+# Source0-md5:	12cfd0bca3f79f49d3eee3f4429423ac
 URL:		https://developers.yubico.com/libfido2/
 BuildRequires:	cmake >= 3.0
 BuildRequires:	hidapi-devel
