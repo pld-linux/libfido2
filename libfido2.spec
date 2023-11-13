@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	static_libs	# static library
+
 Summary:	Library functionality for FIDO 2.0, including communication with a device over USB
 Summary(pl.UTF-8):	Biblioteka funkcji dla FIDO 2.0, wraz z komunikacją z urządzeniem po USB
 Name:		libfido2
@@ -15,7 +19,7 @@ BuildRequires:	libcbor-devel
 BuildRequires:	openssl-devel >= 1.1.0
 BuildRequires:	pcsc-lite-devel
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	rpmbuild(macros) >= 1.742
 BuildRequires:	udev-devel
 BuildRequires:	zlib-devel
 Requires:	openssl >= 1.1.0
@@ -63,6 +67,7 @@ install -d build
 cd build
 # note: exects CMAKE_INSTALL_LIBDIR relative to prefix
 %cmake .. \
+	%{cmake_on_off static_libs BUILD_STATIC_LIBS} \
 	-DBUILD_TESTS:BOOL=OFF \
 	-DCMAKE_INSTALL_LIBDIR=%{_lib} \
 	-DGZIP_PATH=FALSE \
@@ -106,6 +111,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*_pk_*.3*
 %{_mandir}/man3/fido*.3*
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libfido2.a
+%endif
