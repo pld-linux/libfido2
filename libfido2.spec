@@ -22,7 +22,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.742
 BuildRequires:	udev-devel
 BuildRequires:	zlib-devel
-Requires:	openssl >= 1.1.0
+Requires:	openssl%{?_isa} >= 1.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -38,8 +38,8 @@ FIDO po USB, a także weryfikowania podpisów poświadczeń i zapewnień.
 Summary:	Header files for FIDO2 library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki FIDO2
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	openssl-devel >= 1.1.0
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:	openssl-devel%{?_isa} >= 1.1.0
 
 %description devel
 Header files for FIDO2 library.
@@ -51,7 +51,7 @@ Pliki nagłówkowe biblioteki FIDO2.
 Summary:	Static FIDO2 library
 Summary(pl.UTF-8):	Biblioteka statyczna FIDO2
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
 
 %description static
 Static FIDO2 library.
